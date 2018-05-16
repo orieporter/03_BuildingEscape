@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "OpenDoor.h"
+#include "Engine/World.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 
 
@@ -19,16 +20,17 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();	
+
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 void UOpenDoor::OpenDoor()
 {
 	// Find the owning Actor
 	AActor* Owner = GetOwner();
-	UE_LOG(LogTemp, Warning, TEXT("%s's rotation is %s"), *Owner->GetName(), *Owner->GetActorRotation().ToString());
 
 	// Create a rotator
-	FRotator NewRotation = FRotator(0.0f, 90.0f, 0.0f);
+	FRotator NewRotation = FRotator(0.0f, -90.0f, 0.0f);
 	// Set the door rotation
 	Owner->SetActorRotation(NewRotation);
 }
