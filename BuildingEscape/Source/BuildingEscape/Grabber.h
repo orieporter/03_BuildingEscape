@@ -29,20 +29,30 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
+	// Determines length at which objects can be grabbed
 	float Reach = 100.0f;
+
+	// Component that handles grabbing, moving, releasing
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	// Component that handles button/axis input
 	UInputComponent* InputComponent = nullptr;
 
-	// Ray-cast and grab what's in reach
+	// Line trace and grab what's in reach
 	void Grab();
 
-	// Called when grab is released
+	// Release grabbed object
 	void Release();
 
+	// Verify input component is attached and bind actions to keys
 	void SetupInputComponent();
 
+	// Verify that component is present and store in PhysicsHandle
 	void FindPhysicsHandleComponent();
 
-	// return hit for first physics body in reach
+	// Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	// Return start and end vectors of line trace
+	const FTwoVectors GetLineTracePoints();
 };
