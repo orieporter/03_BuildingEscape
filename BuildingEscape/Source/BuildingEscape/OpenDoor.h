@@ -23,8 +23,6 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	void CloseDoor();
-
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -36,16 +34,16 @@ public:
 		FDoorEvent OnClose;
 
 private:
-	UPROPERTY(EditAnywhere)
-		ATriggerVolume* PressurePlate = nullptr;
+	AActor* Owner;
 
 	UPROPERTY(EditAnywhere)
-		float TriggerMass = 20.0f;
+		AActor* Key1;
 
-	AActor* Owner = nullptr;
+	UPROPERTY(EditAnywhere)
+		AActor* Key2;
 
-	// Returns total mass of actors on plate in kilograms
-	const float GetTotalMassOfActorsOnPlate();
+	UPROPERTY(EditAnywhere)
+		AActor* Key3;
 
 		
 	
